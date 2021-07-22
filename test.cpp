@@ -1,21 +1,17 @@
 #include <stdio.h>
 #include <ncurses.h>
 #include "resource.hpp"
+#include <iostream>
 
 int main()
 {
-    initscr();
-    clear();
-    noecho();
-    cbreak();	/* Line buffering disabled. pass on everything */
-
     //Creating a window and printing menu.
-    Window test;
-    test.PrintMenu(Choices::choices);
-    
-
-    clrtoeol();
-    refresh();
-    endwin();
+    switch (Window test(10, 50); test.PrintMenu(Choices::choices))
+    {
+        case 1:
+            Window test2(50, 20);
+            test2.PrintMenu(Choices::test);
+            break;
+    }
     return 0;
 }

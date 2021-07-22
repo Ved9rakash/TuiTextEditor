@@ -27,11 +27,13 @@ private:
     int m_char;
     
 public:
-    Window();
+    Window(int height, int width);
 
     void PrintBody(int highlight, const char** tArray);
 
-    void PrintMenu(const char** tArray);
+    int PrintMenu(const char** tArray);
+
+    ~Window();
 };
 
 

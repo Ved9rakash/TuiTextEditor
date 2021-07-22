@@ -28,9 +28,14 @@ namespace dflt
     const int height{10};
 }
 
-Window::Window()
+Window::Window(int height, int width)
 {
-    m_menuWin = newwin(10, 50, 2, 2);
+    initscr();
+    clear();
+    noecho();
+    cbreak();	/* Line buffering disabled. pass on everything */
+
+    m_menuWin = newwin(height, width, 2, 2);
     keypad(m_menuWin, TRUE);
     mvprintw(0, (COLS - dflt::sizeOfText)/2, Choices::text);
     refresh();
@@ -57,7 +62,7 @@ void Window::PrintBody(int highlight, const char** tArray)
     wrefresh(m_menuWin);
 }
 
-void Window::PrintMenu(const char** tArray)
+int Window::PrintMenu(const char** tArray)
 {
     int m_highlight = 1;
     int m_choice = 0;
@@ -90,4 +95,12 @@ void Window::PrintMenu(const char** tArray)
         if(m_choice != 0)	/* User did a choice come out of the infinite loop */
             break;
     }
+    return m_choice;
+}
+
+Window::~Window()
+{
+    clrtoeol();
+    refresh();
+    endwin();
 }
