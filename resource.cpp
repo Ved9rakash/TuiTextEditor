@@ -28,14 +28,14 @@ namespace dflt
     const int height{10};
 }
 
-Window::Window(int height, int width)
+Window::Window(int height, int width, int starty, int startx)
 {
     initscr();
     clear();
     noecho();
     cbreak();	/* Line buffering disabled. pass on everything */
 
-    m_menuWin = newwin(height, width, 2, 2);
+    m_menuWin = newwin(height, width, starty, startx);
     keypad(m_menuWin, TRUE);
     mvprintw(0, (COLS - dflt::sizeOfText)/2, Choices::text);
     refresh();
@@ -46,7 +46,7 @@ void Window::PrintBody(int highlight, const char** tArray)
     int x, y;
     x = 2;
     y = 2;
-    box(m_menuWin, 10, 0);
+    box(m_menuWin, 0, 0);
     for(int i = 0; i < dflt::n_choices; ++i)
     {	
         if(highlight == i + 1) /* High light the present choice */
