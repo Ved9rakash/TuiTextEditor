@@ -1,36 +1,12 @@
 //resource.cpp
 
 #include "resource.hpp"
+#include "namespace.hpp"
+
 #include <iostream>
 #include <string>
+#include <vector>
 
-//Default namespaces - Defination
-namespace Choices
-{
-    const char* choices[] = {
-        "New    - Create new file.",
-        "Open   - Open Existing file.",
-        "Delete - Delete saved file.",
-        "Recent - Recently opened files.",
-        "Exit   - Leaves the Editor."
-    };
-
-    const char* test[] = {
-        "vaibhav",
-        "ruchi",
-        "arjun"
-    };
-
-    const char* text = "Text Editor";
-}
-
-namespace dflt
-{
-    const int n_choices = sizeof(Choices::choices) / sizeof(char *);
-    const int sizeOfText = sizeof(Choices::text) / sizeof(char*);
-    const int width{30};
-    const int height{10};
-}
 
 Window::Window(int height, int width, int starty, int startx)
 {
@@ -41,7 +17,7 @@ Window::Window(int height, int width, int starty, int startx)
 
     m_menuWin = newwin(height, width, starty, startx);
     keypad(m_menuWin, TRUE);
-    mvprintw(0, (COLS - dflt::sizeOfText)/2, Choices::text);
+    mvprintw(0, (COLS - dflt::sizeOfText)/2, Text::text);
     refresh();
 }
 
@@ -51,7 +27,7 @@ void Window::PrintBody(int highlight, const char** tArray)
     x = 2;
     y = 2;
     box(m_menuWin, 0, 0);
-    for(int i = 0; i < dflt::n_choices; ++i)
+    for(int i = 0; i < dflt::n_Text; ++i)
     {	
         if(highlight == i + 1) /* High light the present choice */
         {	
@@ -77,12 +53,12 @@ int Window::PrintMenu(const char** tArray)
         switch(wgetch(m_menuWin))
         {	case KEY_UP:
                 if(m_highlight == 1)
-                    m_highlight = dflt::n_choices;
+                    m_highlight = dflt::n_Text;
                 else
                     --m_highlight;
                 break;
             case KEY_DOWN:
-                if(m_highlight == dflt::n_choices)
+                if(m_highlight == dflt::n_Text)
                     m_highlight = 1;
                 else 
                     ++m_highlight;
@@ -104,9 +80,10 @@ int Window::PrintMenu(const char** tArray)
 
 void Window::WriteMode()
 {
-    char text[100];
-    echo();
-    wgetstr(m_menuWin, text);
+    std::string text;
+    
+    // wgetstr(m_menuWin, text);
+    // wgetnstr();
 
 
 }

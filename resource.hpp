@@ -5,22 +5,6 @@
 
 #include <ncurses.h>
 
-//Default namespaces - Declaration
-namespace Choices
-{
-    extern const char* choices[];
-    extern const char* test[];
-    extern const char* text;
-}
-
-namespace dflt
-{
-    extern const int n_choices;
-    extern const int sizeOfText;
-    extern const int width;
-    extern const int height;
-}
-
 class Window
 {
 private:

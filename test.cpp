@@ -20,6 +20,7 @@ i'm currently using).
 */
 
 #include "resource.hpp"
+#include "namespace.hpp"
 
 #include <ncurses.h>
 
@@ -40,7 +41,7 @@ int main()
     while(EXIT)
     {
         //c++17 switch statemtment, menu window is main window.
-        switch (Window menuWindow(9, 50, 2, 2); menuWindow.PrintMenu(Choices::choices))
+        switch (Window menuWindow(9, 50, 2, 2); menuWindow.PrintMenu(Text::mainMenu))
         {
             case 1:
             //Creates new write-text window.
