@@ -1,6 +1,10 @@
+//resource.cpp
+
 #include "resource.hpp"
 #include <iostream>
+#include <string>
 
+//Default namespaces - Defination
 namespace Choices
 {
     const char* choices[] = {
@@ -96,6 +100,25 @@ int Window::PrintMenu(const char** tArray)
             break;
     }
     return m_choice;
+}
+
+void Window::WriteMode()
+{
+    char text[100];
+    echo();
+    wgetstr(m_menuWin, text);
+
+
+}
+
+void Window::deleteFile()
+{
+
+}
+
+void Window::openRecent()
+{
+
 }
 
 Window::~Window()

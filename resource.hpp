@@ -1,8 +1,11 @@
+//resource.hpp
+
 #ifndef RESOURSE_HPP
 #define RESOURSE_HPP
 
 #include <ncurses.h>
 
+//Default namespaces - Declaration
 namespace Choices
 {
     extern const char* choices[];
@@ -22,18 +25,14 @@ class Window
 {
 private:
     WINDOW *m_menuWin;
-    //int m_highlight{1};
-    //int m_choice{0};
-    int m_char;
     
 public:
     Window(int height, int width, int starty, int startx);
-
     void PrintBody(int highlight, const char** tArray);
-
     int PrintMenu(const char** tArray);
-
     void WriteMode();
+    void deleteFile();
+    void openRecent();
 
     ~Window();
 };
