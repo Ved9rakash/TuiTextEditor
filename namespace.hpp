@@ -1,6 +1,9 @@
 #ifndef NAMESPACE_HPP
 #define NAMESPACE_HPP
 
+#include <vector>
+#include <string>
+
 namespace Text
 {
     extern const char* mainMenu[];

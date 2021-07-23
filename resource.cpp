@@ -82,6 +82,7 @@ void Window::WriteMode()
 {
     std::string text;
     
+    
     // wgetstr(m_menuWin, text);
     // wgetnstr();
 
@@ -90,12 +91,69 @@ void Window::WriteMode()
 
 void Window::deleteFile()
 {
-
+    mvprintw(5, 0, "Press x which file to delete.");
+    PrintMenuV(Files::fileNames[0]);
 }
 
 void Window::openRecent()
 {
 
+}
+
+void Window::PrintBodyV(int highlight, std::vector<std::string>& test)
+{
+    int x, y;
+    x = 2;
+    y = 2;
+    box(m_menuWin, 0, 0);
+    for(int i = 0; i < dflt::n_Text; ++i)
+    {	
+        if(highlight == i + 1) /* High light the present choice */
+        {	
+            wattron(m_menuWin, A_REVERSE); 
+            mvwprintw(m_menuWin, y, x, "%s", test[i]);
+            wattroff(m_menuWin, A_REVERSE);
+        }
+        else
+            mvwprintw(m_menuWin, y, x, "%s",test[i]);
+        ++y;
+    }
+    wrefresh(m_menuWin);
+}
+
+void Window::PrintMenuV(std::vector<std::string>& test)
+{
+    int m_highlight = 1;
+    int m_choice = 0;
+    PrintBodyV(m_highlight, test);
+    while(1)
+    {	
+        // c = wgetch(menu_win);
+        switch(wgetch(m_menuWin))
+        {	case KEY_UP:
+                if(m_highlight == 1)
+                    m_highlight = test.size();
+                else
+                    --m_highlight;
+                break;
+            case KEY_DOWN:
+                if(m_highlight == test.size())
+                    m_highlight = 1;
+                else 
+                    ++m_highlight;
+                break;
+            case 10:
+                m_choice = m_highlight;
+                break;
+            default:
+                // mvprintw(24, 0, "Charcter pressed is = %3d Hopefully it can be printed as '%c'", c, c);
+                refresh();
+                break;
+        }
+        PrintBodyV(m_highlight, test);
+        if(m_choice != 0)	/* User did a choice come out of the infinite loop */
+            break;
+    }
 }
 
 Window::~Window()
