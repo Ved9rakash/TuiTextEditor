@@ -55,6 +55,7 @@ int main()
             //Creates open-files windows
                 {
                     Window openWindow(50, 20, 10, 10);
+                    openWindow.deleteFile();
                     //Code for opening the files
                 }
                 break;
@@ -75,11 +76,7 @@ int main()
                 break;
             }
             case 5:
-            //Exits the window
-            {
-                Window exitWindow(9, 50, 2, 2);
-                sleep(1);
-            }
+                //Exits the window
                 //Exits the loop and breaks
                 EXIT = false;
                 break;

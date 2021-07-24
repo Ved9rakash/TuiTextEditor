@@ -6,15 +6,15 @@
 
 namespace Text
 {
-    extern const char* mainMenu[];
-    extern const char* test[];
-    extern const char* text;
+    extern std::vector<std::string> mainMenu;
+    extern std::vector<std::string> test;
+    extern const char* textEditor;
 }
 
 namespace dflt
 {
-    extern const int n_Text;
-    extern const int sizeOfText;
+    extern const int n_mainMenu;
+    extern const int n_textEditor;
     extern const int width;
     extern const int height;
 }
