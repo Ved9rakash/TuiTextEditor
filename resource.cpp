@@ -6,6 +6,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <unistd.h>
 
 
 Window::Window(int height, int width, int starty, int startx)
@@ -92,7 +93,7 @@ void Window::WriteMode()
 void Window::deleteFile()
 {
     mvprintw(5, 0, "Press x which file to delete.");
-    PrintMenuV(Files::fileNames[0]);
+    PrintMenuV(Files::fileNames);
 }
 
 void Window::openRecent()
@@ -123,6 +124,11 @@ void Window::PrintBodyV(int highlight, std::vector<std::string>& test)
 
 void Window::PrintMenuV(std::vector<std::string>& test)
 {
+    for (std::string elem : test)
+    {
+        std::cout << elem;
+    }
+    sleep(3);
     int m_highlight = 1;
     int m_choice = 0;
     PrintBodyV(m_highlight, test);

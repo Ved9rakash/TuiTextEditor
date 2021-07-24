@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <string>
+#include <array>
 
 namespace Text
 {
@@ -22,12 +23,6 @@ namespace Text
     const char* text = "Text Editor";
 }
 
-namespace Files
-{
-    std::vector<std::string> fileNames[10];
-
-}
-
 namespace dflt
 {
     const int n_Text = sizeof(Text::mainMenu) / sizeof(char *);
@@ -38,5 +33,9 @@ namespace dflt
 
 namespace Files
 {
-    std::vector<std::string> fileNames[10];
+    std::vector<std::string> fileNames = {
+        "vaibhavSharma",
+        "arjunSharma",
+        "ruchihSharma"
+    };
 }

@@ -21,7 +21,7 @@ namespace dflt
 
 namespace Files
 {
-    extern std::vector<std::string> fileNames[10];
+    extern std::vector<std::string> fileNames;
 }
 
 #endif

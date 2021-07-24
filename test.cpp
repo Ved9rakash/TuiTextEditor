@@ -47,7 +47,6 @@ int main()
             //Creates new write-text window.
             {
                 Window editWindow(50, 20, 10, 10);
-                editWindow.WriteMode();
                 //Code for file writing
             }
                 break;
@@ -64,6 +63,7 @@ int main()
             //Creates open-files window and let user to delete specific file.
             {
                 Window deleteFile(50, 20, 10, 10);
+                deleteFile.deleteFile();
                 //code for opening the files and then deleting it.
                 break;
             }

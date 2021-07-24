@@ -4,6 +4,8 @@
 #define RESOURSE_HPP
 
 #include <ncurses.h>
+#include <vector>
+#include <string>
 
 class Window
 {
