@@ -46,8 +46,8 @@ int main()
             case 1:
             //Creates new write-text window.
             {
-                Window newFileWindow(LINES, COLS, 1, 1);
-                newFileWindow.WriteMode();
+                Window newFileWindow(LINES-2, COLS-2, 1, 1);
+                newFileWindow.NewFile();
                 //Code for file writing
             }
                 break;
@@ -56,7 +56,7 @@ int main()
             //Creates open-files windows
                 {
                     Window openFileWindow(20, 50, 2, 2);
-                    openFileWindow.deleteFile();
+                    openFileWindow.PrintMenu(Files::fileNames);
                     //Code for opening the files
                 }
                 break;
@@ -73,6 +73,7 @@ int main()
             //Creates open-recent windows to display latest 5 opened files.
             {
                 Window openRecentWindow(20, 50, 2, 2);
+                openRecentWindow.openRecent();
                 //code for opening the recent files.
                 break;
             }
