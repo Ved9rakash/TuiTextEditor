@@ -38,9 +38,5 @@ namespace dflt
 //File names to be stored inside vector and updated.
 namespace Files
 {
-    std::vector<std::string> fileNames = {
-        "vaibhavSharma",
-        "arjunSharma",
-        "ruchihSharma"
-    };
+    std::vector<std::string> fileNames;
 }

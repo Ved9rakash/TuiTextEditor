@@ -15,11 +15,10 @@ private:
 public:
     Window(int height, int width, int starty, int startx);
     void PrintBody(int highlight, std::vector<std::string> text);
-    int PrintMenu(std::vector<std::string> text);
-    void PrintBodyV(int highlight, std::vector<std::string> text);
-    void PrintMenuV(std::vector<std::string>& text, int flag = 0);
-    void NewFile();
-    void WriteMode(std::string fileName);       //Creates new file and edits it
+    int PrintMenu(std::vector<std::string> text, int flag = 0);
+    void WriteMode(std::string fileName);
+    void openFile();
+    void NewFile();         //Creates new file and edits it
     void deleteFile();      //Deletes current files and updates it.
     void openRecent();      //Open last 5 recent files.
 

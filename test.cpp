@@ -33,11 +33,17 @@ i'm currently using).
 
 int main()
 {
-    //Creating a window and printing menu.
-    //system("ls");
+    bool EXIT = true;
+
+    //Getting the file inside the vector.
+    FILE *fp = popen("ls", "r");
+    char buf[30];
+    while (fgets(buf, 30, fp))
+    {
+        Files::fileNames.push_back(buf);
+    }
 
     //Variable dependent infinite loop.
-    bool EXIT = true;
     while(EXIT)
     {
         //c++17 switch statemtment, menu window is main window.
@@ -56,7 +62,7 @@ int main()
             //Creates open-files windows
                 {
                     Window openFileWindow(20, 50, 2, 2);
-                    openFileWindow.PrintMenu(Files::fileNames);
+                    openFileWindow.openFile();
                     //Code for opening the files
                 }
                 break;

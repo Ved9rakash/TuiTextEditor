@@ -10,6 +10,7 @@
 #include <unistd.h>
 #include <fstream>
 #include <stdlib.h>
+#include <ios>
 
 
 /*
@@ -51,7 +52,7 @@ void Window::PrintBody(int highlight, std::vector<std::string> text)
     xMargin = 2;
     yMargin = 2;
     box(m_menuWin, 0, 0);
-    for(int i = 0; i < dflt::n_mainMenu; ++i)
+    for(auto i = 0; i < static_cast<int>(text.size()); ++i)
     {	
         if(highlight == i + 1) /* High light the present choice */
         {	
@@ -66,72 +67,15 @@ void Window::PrintBody(int highlight, std::vector<std::string> text)
     wrefresh(m_menuWin);
 }
 
-int Window::PrintMenu(std::vector<std::string> text)
+int Window::PrintMenu(std::vector<std::string> text, int flag /*=0*/)
 {
     /*
         Take the input(Keyboard) from user and pass it to PrintBody()
         to print the values with attributes.
     */
-    int m_highlight = 1;
+    long unsigned int m_highlight = 1;
     int m_choice = 0;
     PrintBody(m_highlight, text);
-
-    while(m_choice == 0)
-    {	
-        switch(wgetch(m_menuWin))
-        {	case KEY_UP:
-                if(m_highlight == 1)
-                    m_highlight = dflt::n_mainMenu;
-                else
-                    --m_highlight;
-                break;
-            case KEY_DOWN:
-                if(m_highlight == dflt::n_mainMenu)
-                    m_highlight = 1;
-                else 
-                    ++m_highlight;
-                break;
-            case 10:
-                m_choice = m_highlight;
-                break;
-            case 120:
-                //Delete the value and update it.
-            default:
-                // mvprintw(24, 0, "Charcter pressed is = %3d Hopefully it can be printed as '%c'", c, c);
-                refresh();
-                break;
-        }
-        PrintBody(m_highlight, text);
-    }
-    return m_choice;
-}
-
-void Window::PrintBodyV(int highlight, std::vector<std::string> test)
-{
-    int x, y;
-    x = 2;
-    y = 2;
-    box(m_menuWin, 0, 0);
-    for(int i = 0; i < test.size(); ++i)
-    {	
-        if(highlight == i + 1) /* High light the present choice */
-        {	
-            wattron(m_menuWin, A_REVERSE); 
-            mvwprintw(m_menuWin, y, x, "%s", test[i].c_str());
-            wattroff(m_menuWin, A_REVERSE);
-        }
-        else
-            mvwprintw(m_menuWin, y, x, "%s",test[i].c_str());
-        ++y;
-    }
-    wrefresh(m_menuWin);
-}
-
-void Window::PrintMenuV(std::vector<std::string>& text, int flag )
-{
-    int m_highlight = 1;
-    int m_choice = 0;
-    PrintBodyV(m_highlight, text);
 
     /*
         If flag is 0 i.e only for getting menu and displaying it.
@@ -162,7 +106,7 @@ void Window::PrintMenuV(std::vector<std::string>& text, int flag )
                     refresh();
                     break;
             }
-        PrintBodyV(m_highlight, text);
+        PrintBody(m_highlight, text);
         }
     }
     /*
@@ -196,49 +140,59 @@ void Window::PrintMenuV(std::vector<std::string>& text, int flag )
                     refresh();
                     break;
             }
-        PrintBodyV(m_highlight, text);
+        PrintBody(m_highlight, text);
         }
     }
+    return m_choice;
 }
 
 void Window::WriteMode(std::string fileName)
 {
-    //Open file "fileName" and append the data.
-    //If the data 
-
+    //Open file "fileName" in append mode.
+    //If it's present
+    mvprintw(5, 0, "Enter data");
+    std::fstream file;
+    file.open(fileName, std::ios::out);
+    char text[1024];
+    getstr(text);
+    file << text << '\n';
+    file.close();
 }
 
 void Window::NewFile()
 {
-    char fileN[20];
+    char fileName[20];
     echo();
-
-
     //File name.
     mvprintw(3, 0, "Enter the file name:\n");
-    getstr(fileN);
-    Files::fileNames.push_back(fileN);
+    getstr(fileName);
+    Files::fileNames.push_back(fileName);
+    WriteMode(fileName);
+}
+
+void Window::openFile()
+{
+    int selected = PrintMenu(Files::fileNames);
+    WriteMode(Files::fileNames[selected]);
 }
 
 void Window::deleteFile()
 {
-    mvprintw(5, 0, "Press x which file to delete.");
-
-    FILE *fp = popen("ls", "r");
-    char buf[30];
-    while (fgets(buf, 30, fp))
-    {
-        Files::fileNames.push_back(buf);
-    }
-    PrintMenuV(Files::fileNames, 1);
+    int selected = PrintMenu(Files::fileNames, 1);
+    Files::fileNames.erase(Files::fileNames.begin() + selected - 1);
 }
 
 void Window::openRecent()
 {
+    //Open recent files.
     mvprintw(5, 0, "Press 'Enter' to open file.");
     //Prints the file.
-    PrintMenuV(Files::fileNames);
-
+    //This gives error
+    std::vector<std::string> recentFiles{"", "", "", "", ""};
+    for (int count = 5; count > 0; --count)
+        recentFiles[5-count] = Files::fileNames[count];
+    int selected = PrintMenu(recentFiles);
+    WriteMode(Files::fileNames[selected]);
 }
 
 Window::~Window()
