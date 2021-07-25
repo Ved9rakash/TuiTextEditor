@@ -36,7 +36,7 @@ int main()
     //Creating a window and printing menu.
     //system("ls");
 
-    //Variable dependent While loop.
+    //Variable dependent infinite loop.
     bool EXIT = true;
     while(EXIT)
     {
@@ -46,7 +46,8 @@ int main()
             case 1:
             //Creates new write-text window.
             {
-                Window editWindow(50, 20, 10, 10);
+                Window newFileWindow(LINES, COLS, 1, 1);
+                newFileWindow.WriteMode();
                 //Code for file writing
             }
                 break;
@@ -54,8 +55,8 @@ int main()
             case 2:
             //Creates open-files windows
                 {
-                    Window openWindow(50, 20, 10, 10);
-                    openWindow.deleteFile();
+                    Window openFileWindow(20, 50, 2, 2);
+                    openFileWindow.deleteFile();
                     //Code for opening the files
                 }
                 break;
@@ -63,15 +64,15 @@ int main()
             case 3:
             //Creates open-files window and let user to delete specific file.
             {
-                Window deleteFile(50, 20, 10, 10);
-                deleteFile.deleteFile();
+                Window deleteFileWindow(20, 50, 2, 2);
+                deleteFileWindow.deleteFile();
                 //code for opening the files and then deleting it.
                 break;
             }
             case 4:
             //Creates open-recent windows to display latest 5 opened files.
             {
-                Window openRecent(50, 20, 10, 10);
+                Window openRecentWindow(20, 50, 2, 2);
                 //code for opening the recent files.
                 break;
             }
@@ -82,5 +83,6 @@ int main()
                 break;
         }
     }
+    //Implicity menuWindow destructor called from switch and end of program.
     return 0;
 }

@@ -1,9 +1,11 @@
+//namespace.cpp
+
 #include "namespace.hpp"
 
 #include <vector>
 #include <string>
 #include <array>
-//Start
+
 namespace Text
 {
     std::vector<std::string> mainMenu = {
@@ -20,9 +22,11 @@ namespace Text
         "arjun"
     };
 
+    //Editor main title
     const char* textEditor = "Text Editor";
 }
 
+//Default variable namespace
 namespace dflt
 {
     const int n_mainMenu = Text::mainMenu.size();
@@ -31,6 +35,7 @@ namespace dflt
     const int height{10};
 }
 
+//File names to be stored inside vector and updated.
 namespace Files
 {
     std::vector<std::string> fileNames = {

@@ -46,7 +46,7 @@ int main()
             case 1:
             //Creates new write-text window.
             {
-                Window editWindow(50, 20, 10, 10);
+                Window editWindow(LINES, COLS, 1, 1);
                 //Code for file writing
             }
                 break;
@@ -54,7 +54,7 @@ int main()
             case 2:
             //Creates open-files windows
                 {
-                    Window openWindow(50, 20, 10, 10);
+                    Window openWindow(20, 50, 10, 10);
                     openWindow.deleteFile();
                     //Code for opening the files
                 }
@@ -63,7 +63,7 @@ int main()
             case 3:
             //Creates open-files window and let user to delete specific file.
             {
-                Window deleteFile(50, 20, 10, 10);
+                Window deleteFile(20, 50, 10, 10);
                 deleteFile.deleteFile();
                 //code for opening the files and then deleting it.
                 break;
@@ -71,7 +71,7 @@ int main()
             case 4:
             //Creates open-recent windows to display latest 5 opened files.
             {
-                Window openRecent(50, 20, 10, 10);
+                Window openRecent(20, 50, 10, 10);
                 //code for opening the recent files.
                 break;
             }

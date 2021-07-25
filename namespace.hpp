@@ -4,6 +4,9 @@
 #include <vector>
 #include <string>
 
+//namspace.hpp
+
+//Text and menu used inside the program
 namespace Text
 {
     extern std::vector<std::string> mainMenu;
@@ -11,6 +14,7 @@ namespace Text
     extern const char* textEditor;
 }
 
+//Default variables
 namespace dflt
 {
     extern const int n_mainMenu;
@@ -19,6 +23,7 @@ namespace dflt
     extern const int height;
 }
 
+//Files used inside the program
 namespace Files
 {
     extern std::vector<std::string> fileNames;

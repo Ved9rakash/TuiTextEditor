@@ -6,6 +6,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <string.h>
 #include <unistd.h>
 
 
@@ -48,7 +49,8 @@ int Window::PrintMenu(std::vector<std::string> text)
     int m_highlight = 1;
     int m_choice = 0;
     PrintBody(m_highlight, text);
-    while(1)
+
+    while(m_choice == 0)
     {	
         switch(wgetch(m_menuWin))
         {	case KEY_UP:
@@ -74,8 +76,6 @@ int Window::PrintMenu(std::vector<std::string> text)
                 break;
         }
         PrintBody(m_highlight, text);
-        if(m_choice != 0)	/* User did a choice come out of the infinite loop */
-            break;
     }
     return m_choice;
 }
@@ -101,13 +101,18 @@ void Window::PrintBodyV(int highlight, std::vector<std::string> test)
     wrefresh(m_menuWin);
 }
 
-void Window::PrintMenuV(std::vector<std::string>& test)
+void Window::PrintMenuV(std::vector<std::string>& test, int flag = 0)
 {
     int m_highlight = 1;
     int m_choice = 0;
     PrintBodyV(m_highlight, test);
-    sleep(2);
-    while(1)
+
+    /*
+        If flag is 0 i.e only for getting menu and displaying it.
+    */
+    if (flag == 0)
+    {
+        while(m_choice == 0)
     {	
         // c = wgetch(menu_win);
         switch(wgetch(m_menuWin))
@@ -131,32 +136,62 @@ void Window::PrintMenuV(std::vector<std::string>& test)
                 refresh();
                 break;
         }
+    }
         PrintBodyV(m_highlight, test);
-        if(m_choice != 0)	/* User did a choice come out of the infinite loop */
-            break;
+    }
+    /*
+        If flag is 1 i.e only for getting menu and displaying it and asking user to press X.
+    */
+    else if(flag ==1)
+    {
+        while(m_choice == 0)
+        {
+            switch(wgetch(m_menuWin))
+            {	case KEY_UP:
+                    if(m_highlight == 1)
+                        m_highlight = test.size();
+                    else
+                        --m_highlight;
+                    break;
+                case KEY_DOWN:
+                    if(m_highlight == test.size())
+                        m_highlight = 1;
+                    else 
+                        ++m_highlight;
+                    break;
+                case 120:
+                    m_choice = m_highlight;
+                    //One the respected file in append mode.
+                    break;
+                default:
+                    // mvprintw(24, 0, "Charcter pressed is = %3d Hopefully it can be printed as '%c'", c, c);
+                    refresh();
+                    break;
+            }
+        PrintBodyV(m_highlight, test);
+        }
     }
 }
 
 void Window::WriteMode()
 {
-    std::string text;
-    
-    
-    // wgetstr(m_menuWin, text);
-    // wgetnstr();
-
-
+    char fileName[20];
+    mvprintw(3, 0, "Enter the file name:\n");
+    echo();
+    getstr(fileName);
+    Files::fileNames.push_back(fileName);
 }
 
 void Window::deleteFile()
 {
     mvprintw(5, 0, "Press x which file to delete.");
-    PrintMenuV(Files::fileNames);
+    PrintMenuV(Files::fileNames, 1);
 }
 
 void Window::openRecent()
 {
-
+    mvprintw(5, 0, "Press 'Enter' to open file.");
+    PrintMenuV(Files::fileNames);
 }
 
 Window::~Window()
