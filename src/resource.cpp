@@ -11,6 +11,8 @@
 #include <fstream>
 #include <stdlib.h>
 #include <ios>
+#include <experimental/filesystem>
+#include <algorithm>
 
 
 /*
@@ -25,6 +27,14 @@ Window::Window(int height, int width, int starty, int startx)
         Initialize the screen. Clearing screen.
         Setting the input to noecho() with cbreak.
     */
+   //Getting the file inside the vector.
+    FILE *fp = popen("ls", "r");
+    char buf[30];
+    Files::fileNames.clear();
+    while (fgets(buf, 30, fp))
+    {
+        Files::fileNames.push_back(buf);
+    }
     initscr();
     clear();
     noecho();
@@ -151,13 +161,31 @@ void Window::WriteMode(std::string fileName)
     //Open file "fileName" in append mode.
     //If it's present
     echo();
-    mvprintw(5, 0, "Enter data\n\n");
-    std::fstream file;
-    file.open(fileName, std::ios::out);
-    char text[1024];
-    getstr(text);
-    file << text << '\n';
-    file.close();
+    mvprintw(5, 0, "\n");
+    if (std::experimental::filesystem::exists(fileName))
+    {
+        std::fstream file;
+        file.open(fileName, std::ios::out);
+        char text[1024];
+        getstr(text);
+        file << text << '\n';
+        file.close();
+        Files::fileNames.push_back(fileName);
+    }
+    else
+    {
+        std::string cmd = "touch " + fileName;
+        //If file doesnt exists.
+        system(cmd.c_str());
+        std::fstream file;
+        file.open(fileName, std::ios::out);
+        char text[1024];
+        getstr(text);
+        file << text << '\n';
+        file.close();
+        Files::fileNames.push_back(fileName);
+    }
+    
 }
 
 void Window::NewFile()
@@ -167,7 +195,6 @@ void Window::NewFile()
     //File name.
     mvprintw(3, 0, "Enter the file name:\n");
     getstr(fileName);
-    Files::fileNames.push_back(fileName);
     WriteMode(fileName);
 }
 
@@ -180,11 +207,13 @@ void Window::openFile()
 
 void Window::deleteFile()
 {
-    std::string cmd;
+    std::string cmd, fileName;
     int selected = PrintMenu(Files::fileNames, 1);
-    cmd = "rm -f " + Files::fileNames[selected];
-    Files::fileNames.erase(Files::fileNames.begin() + selected - 1);
+    fileName = Files::fileNames[selected];
+    cmd = "rm -f " + fileName;
     system(cmd.c_str());
+    Files::fileNames.erase(Files::fileNames.begin() + selected - 1);
+    
 }
 
 Window::~Window()

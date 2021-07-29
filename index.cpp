@@ -35,14 +35,6 @@ int main()
 {
     bool EXIT = true;
 
-    //Getting the file inside the vector.
-    FILE *fp = popen("ls", "r");
-    char buf[30];
-    while (fgets(buf, 30, fp))
-    {
-        Files::fileNames.push_back(buf);
-    }
-
     //Variable dependent infinite loop.
     while(EXIT)
     {

@@ -75,15 +75,8 @@ int main()
                 //code for opening the files and then deleting it.
                 break;
             }
+
             case 4:
-            //Creates open-recent windows to display latest 5 opened files.
-            {
-                Window openRecentWindow(20, 50, 2, 2);
-                openRecentWindow.openRecent();
-                //code for opening the recent files.
-                break;
-            }
-            case 5:
                 //Exits the window
                 //Exits the loop and breaks
                 EXIT = false;
