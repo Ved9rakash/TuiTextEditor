@@ -164,13 +164,12 @@ void Window::WriteMode(std::string fileName)
     mvprintw(5, 0, "\n");
     if (std::experimental::filesystem::exists(fileName))
     {
-        std::fstream file;
-        file.open(fileName, std::ios::out);
+        std::ofstream file;
+        file.open(fileName, std::ios_base::ate);
         char text[1024];
         getstr(text);
         file << text << '\n';
         file.close();
-        Files::fileNames.push_back(fileName);
     }
     else
     {
@@ -190,6 +189,7 @@ void Window::WriteMode(std::string fileName)
 
 void Window::NewFile()
 {
+    //New file is complete OK
     char fileName[20];
     echo();
     //File name.
@@ -202,18 +202,18 @@ void Window::openFile()
 {
     int selected = PrintMenu(Files::fileNames);
     Window Test(LINES-2, COLS-2, 1, 1);
-    Test.WriteMode(Files::fileNames[selected]);
+    Test.WriteMode(Files::fileNames[selected - 1]);
 }
 
 void Window::deleteFile()
 {
+    //Delete Ok.
     std::string cmd, fileName;
     int selected = PrintMenu(Files::fileNames, 1);
-    fileName = Files::fileNames[selected];
-    cmd = "rm -f " + fileName;
+    fileName = Files::fileNames[selected - 1];
+    cmd = "rm -rf " + fileName;
     system(cmd.c_str());
     Files::fileNames.erase(Files::fileNames.begin() + selected - 1);
-    
 }
 
 Window::~Window()
