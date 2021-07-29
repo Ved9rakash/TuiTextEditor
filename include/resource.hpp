@@ -20,7 +20,6 @@ public:
     void openFile();
     void NewFile();         //Creates new file and edits it
     void deleteFile();      //Deletes current files and updates it.
-    void openRecent();      //Open last 5 recent files.
 
     ~Window();
 };

@@ -150,7 +150,8 @@ void Window::WriteMode(std::string fileName)
 {
     //Open file "fileName" in append mode.
     //If it's present
-    mvprintw(5, 0, "Enter data");
+    echo();
+    mvprintw(5, 0, "Enter data\n\n");
     std::fstream file;
     file.open(fileName, std::ios::out);
     char text[1024];
@@ -173,26 +174,17 @@ void Window::NewFile()
 void Window::openFile()
 {
     int selected = PrintMenu(Files::fileNames);
-    WriteMode(Files::fileNames[selected]);
+    Window Test(LINES-2, COLS-2, 1, 1);
+    Test.WriteMode(Files::fileNames[selected]);
 }
 
 void Window::deleteFile()
 {
+    std::string cmd;
     int selected = PrintMenu(Files::fileNames, 1);
+    cmd = "rm -f " + Files::fileNames[selected];
     Files::fileNames.erase(Files::fileNames.begin() + selected - 1);
-}
-
-void Window::openRecent()
-{
-    //Open recent files.
-    mvprintw(5, 0, "Press 'Enter' to open file.");
-    //Prints the file.
-    //This gives error
-    std::vector<std::string> recentFiles{"", "", "", "", ""};
-    for (int count = 5; count > 0; --count)
-        recentFiles[5-count] = Files::fileNames[count];
-    int selected = PrintMenu(recentFiles);
-    WriteMode(Files::fileNames[selected]);
+    system(cmd.c_str());
 }
 
 Window::~Window()

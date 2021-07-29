@@ -12,14 +12,7 @@ namespace Text
         "New    - Create new file.",
         "Open   - Open Existing file.",
         "Delete - Delete saved file.",
-        "Recent - Recently opened files.",
         "Exit   - Leaves the Editor."
-    };
-
-    std::vector<std::string> test = {
-        "vaibhav",
-        "ruchi",
-        "arjun"
     };
 
     //Editor main title

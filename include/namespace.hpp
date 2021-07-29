@@ -10,7 +10,6 @@
 namespace Text
 {
     extern std::vector<std::string> mainMenu;
-    extern std::vector<std::string> test;
     extern const char* textEditor;
 }
 
