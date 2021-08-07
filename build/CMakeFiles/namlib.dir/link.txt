@@ -1,0 +1,2 @@
+/usr/bin/ar qc libnamlib.a CMakeFiles/namlib.dir/home/ved9rakash/cppProjects/TuiTextEditor/src/namespace.cpp.o
+/usr/bin/ranlib libnamlib.a

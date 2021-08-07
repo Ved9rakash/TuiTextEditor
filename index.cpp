@@ -19,8 +19,8 @@ include directory in c_cpp_properties.json - vscode ( which
 i'm currently using).
 */
 
-#include "resource.hpp"
-#include "namespace.hpp"
+#include "include/resource.hpp"
+#include "include/namespace.hpp"
 
 #include <ncurses.h>
 

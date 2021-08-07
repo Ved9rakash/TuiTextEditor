@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/app.dir/home/ved9rakash/cppProjects/TuiTextEditor/index.cpp.o -o app  libreslib.a libnamlib.a -lncurses -lstdc++fs 

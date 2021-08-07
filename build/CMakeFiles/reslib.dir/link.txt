@@ -1,0 +1,2 @@
+/usr/bin/ar qc libreslib.a CMakeFiles/reslib.dir/home/ved9rakash/cppProjects/TuiTextEditor/src/resource.cpp.o
+/usr/bin/ranlib libreslib.a

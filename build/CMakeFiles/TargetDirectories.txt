@@ -1,0 +1,5 @@
+/home/ved9rakash/cppProjects/TuiTextEditor/build/CMakeFiles/rebuild_cache.dir
+/home/ved9rakash/cppProjects/TuiTextEditor/build/CMakeFiles/edit_cache.dir
+/home/ved9rakash/cppProjects/TuiTextEditor/build/CMakeFiles/app.dir
+/home/ved9rakash/cppProjects/TuiTextEditor/build/CMakeFiles/namlib.dir
+/home/ved9rakash/cppProjects/TuiTextEditor/build/CMakeFiles/reslib.dir

@@ -1,6 +1,6 @@
 //namespace.cpp
 
-#include "namespace.hpp"
+#include "../include/namespace.hpp"
 
 #include <vector>
 #include <string>

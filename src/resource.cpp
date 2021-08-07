@@ -1,7 +1,7 @@
 //resource.cpp
 
-#include "resource.hpp"
-#include "namespace.hpp"
+#include "../include/resource.hpp"
+#include "../include/namespace.hpp"
 
 #include <iostream>
 #include <string>
