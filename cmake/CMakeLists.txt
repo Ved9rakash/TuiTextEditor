@@ -8,7 +8,7 @@ project(TextEditor LANGUAGES CXX)
 
 add_library(reslib STATIC ../src/resource.cpp ../include/resource.hpp)
 add_library(namlib STATIC ../src/namespace.cpp ../include/namespace.hpp)
-include_directories()
+
 target_include_directories(reslib PUBLIC include)
 target_include_directories(namlib PUBLIC include)
 target_compile_features(reslib PUBLIC cxx_std_17)
